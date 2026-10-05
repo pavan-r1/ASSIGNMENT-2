@@ -1,7 +1,7 @@
 import pandas as pd
 import mlflow
 import mlflow.sklearn
-
+import joblib
 
 from sklearn.model_selection import train_test_split
 from sklearn.compose import ColumnTransformer
@@ -85,6 +85,8 @@ with mlflow.start_run():
 
     # 9. Train model
     pipeline.fit(X_train, y_train)
+    joblib.dump(pipeline, "models/churn_model.pkl")
+    print("Model saved to models/churn_model.pkl")
 
     # 10. Make predictions
     predictions = pipeline.predict(X_test)
