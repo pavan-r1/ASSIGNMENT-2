@@ -2,7 +2,7 @@ import pandas as pd
 import mlflow
 import mlflow.sklearn
 import joblib
-
+import os
 from sklearn.model_selection import train_test_split
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
@@ -85,6 +85,7 @@ with mlflow.start_run():
 
     # 9. Train model
     pipeline.fit(X_train, y_train)
+    os.makedirs("models", exist_ok=True)
     joblib.dump(pipeline, "models/churn_model.pkl")
     print("Model saved to models/churn_model.pkl")
 
